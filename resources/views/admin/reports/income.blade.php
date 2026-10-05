@@ -57,8 +57,8 @@
                 <input type="date" name="end_date" value="{{ request('end_date') }}" class="form-input" style="padding:.45rem .75rem;font-size:.85rem;">
             </div>
             <div>
-                <input type="hidden" name="period" value="{{ request('start_date') ? 'custom' : $period }}">
-                <button type="submit" class="btn btn-primary btn-sm" style="padding:.55rem 1.25rem;">
+                <button type="submit" name="period" value="custom"
+                        class="btn btn-primary btn-sm" style="padding:.55rem 1.25rem;">
                     <i class="fa-solid fa-filter"></i> Apply Custom Dates
                 </button>
             </div>
@@ -209,7 +209,7 @@
                     <strong style="color:#a78bfa;">{{ $grossMargin }}%</strong>
                 </div>
                 <div style="height:8px;background:rgba(255,255,255,.08);border-radius:99px;overflow:hidden;">
-                    <div style="height:100%;width:{{ min(100, $grossMargin) }}%;background:linear-gradient(90deg, #8b5cf6, #38bdf8);"></div>
+                    <div style="height:100%;width:{{ max(0, min(100, $grossMargin)) }}%;background:linear-gradient(90deg, #8b5cf6, #38bdf8);"></div>
                 </div>
                 <small style="color:var(--text-muted);font-size:.74rem;margin-top:.4rem;display:block;">
                     Percentage of top-line revenue retained after direct container and refilling unit costs.
@@ -222,7 +222,7 @@
                     <strong style="color:#34d399;">{{ $netMargin }}%</strong>
                 </div>
                 <div style="height:8px;background:rgba(255,255,255,.08);border-radius:99px;overflow:hidden;">
-                    <div style="height:100%;width:{{ min(100, $netMargin) }}%;background:linear-gradient(90deg, #10b981, #34d399);"></div>
+                    <div style="height:100%;width:{{ max(0, min(100, $netMargin)) }}%;background:linear-gradient(90deg, #10b981, #34d399);"></div>
                 </div>
                 <small style="color:var(--text-muted);font-size:.74rem;margin-top:.4rem;display:block;">
                     Take-home profit after factoring operating benchmark utilities, supplies and filtration costs.

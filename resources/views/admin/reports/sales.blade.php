@@ -82,10 +82,10 @@
                 </select>
             </div>
 
-            <!-- Action buttons -->
+            <!-- Action buttons: Apply uses custom period, Reset clears all -->
             <div style="display:flex;gap:.5rem;">
-                <input type="hidden" name="period" value="{{ $period === 'custom' || request('start_date') ? 'custom' : $period }}">
-                <button type="submit" class="btn btn-primary btn-sm" style="flex:1;padding:.55rem 1rem;">
+                <button type="submit" name="period" value="custom"
+                        class="btn btn-primary btn-sm" style="flex:1;padding:.55rem 1rem;">
                     <i class="fa-solid fa-magnifying-glass"></i> Apply
                 </button>
                 <a href="{{ route('admin.reports.sales') }}" class="btn btn-outline btn-sm" style="padding:.55rem .85rem;" title="Reset Filters">

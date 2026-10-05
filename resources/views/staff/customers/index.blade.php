@@ -80,10 +80,20 @@
                         </span>
                     </td>
                     <td style="color:var(--text-muted);font-size:.82rem;">{{ $customer->created_at->format('M d, Y') }}</td>
-                    <td>
+                    <td style="display:flex;gap:.5rem;align-items:center;">
                         <a href="{{ route('staff.orders.create', ['customer_id' => $customer->id]) }}" class="btn btn-sm btn-primary">
                             <i class="fa-solid fa-circle-plus"></i> Order
                         </a>
+                        <form action="{{ route('staff.customers.destroy', $customer->id) }}" method="POST"
+                              onsubmit="return confirm('Remove customer account for {{ addslashes($customer->name) }}?\n\nThis is permanent and cannot be undone.')"
+                              style="margin:0;">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-sm btn-danger"
+                                    title="Remove customer account">
+                                <i class="fa-solid fa-trash-can"></i> Remove
+                            </button>
+                        </form>
                     </td>
                 </tr>
                 @endforeach

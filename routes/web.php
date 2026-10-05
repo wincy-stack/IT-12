@@ -61,9 +61,10 @@ Route::middleware(['auth', 'role:staff'])->prefix('staff')->name('staff.')->grou
     Route::patch('/orders/{order}', [StaffDashboard::class, 'ordersUpdate'])->name('orders.update');
 
     // Customers
-    Route::get('/customers',         [StaffDashboard::class, 'customersIndex'])->name('customers.index');
-    Route::get('/customers/create',  [StaffDashboard::class, 'customersCreate'])->name('customers.create');
-    Route::post('/customers',        [StaffDashboard::class, 'customersStore'])->name('customers.store');
+    Route::get('/customers',            [StaffDashboard::class, 'customersIndex'])->name('customers.index');
+    Route::get('/customers/create',     [StaffDashboard::class, 'customersCreate'])->name('customers.create');
+    Route::post('/customers',           [StaffDashboard::class, 'customersStore'])->name('customers.store');
+    Route::delete('/customers/{user}',  [StaffDashboard::class, 'customersDestroy'])->name('customers.destroy');
 
     // Supplies & Stock
     Route::get('/supplies',                     [StaffDashboard::class, 'suppliesIndex'])->name('supplies.index');

@@ -225,6 +225,26 @@ class DashboardController extends Controller
             ->with('success', 'Customer account for "' . $validated['name'] . '" created successfully!');
     }
 
+    public function customersDestroy(User $user)
+    {
+        // Ensure we only delete customers
+        if ($user->role !== 'customer') {
+            return back()->with('error', 'Only customer accounts can be removed.');
+        }
+
+        // Prevent deleting customers with active (non-cancelled) orders
+        $activeOrders = $user->orders()->whereNotIn('status', ['cancelled', 'completed'])->count();
+        if ($activeOrders > 0) {
+            return back()->with('error', 'Cannot remove "' . $user->name . '" — they have ' . $activeOrders . ' active order(s). Please complete or cancel them first.');
+        }
+
+        $name = $user->name;
+        $user->delete();
+
+        return redirect()->route('staff.customers.index')
+            ->with('success', 'Customer account for "' . $name . '" has been removed successfully.');
+    }
+
     // ─── Supplies ──────────────────────────────────────────────────────
     public function suppliesIndex()
     {
